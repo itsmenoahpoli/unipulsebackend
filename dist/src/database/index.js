@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userRepository = exports.BaseRepository = exports.initializeDatabase = exports.DBDataSource = void 0;
+exports.announcementsRepository = exports.userRolesRepository = exports.usersRepository = exports.initializeDatabase = exports.DBDataSource = void 0;
 const typeorm_1 = require("typeorm");
-const repositories_1 = require("./repositories");
-Object.defineProperty(exports, "BaseRepository", { enumerable: true, get: function () { return repositories_1.BaseRepository; } });
 const entities_1 = require("./entities");
 const configs_1 = require("../configs");
 const DBDataSource = new typeorm_1.DataSource({
@@ -14,19 +12,22 @@ const DBDataSource = new typeorm_1.DataSource({
     password: configs_1.SETTINGS.APP_DB_PASSWORD,
     database: configs_1.SETTINGS.APP_DB_DATABASE,
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [__dirname + "/entities/*.entity.ts"],
     migrations: [__dirname + "/migrations/*.migration.ts"],
     subscribers: [],
 });
 exports.DBDataSource = DBDataSource;
-let userRepository;
+let usersRepository;
+let userRolesRepository;
+let announcementsRepository;
 const initializeDatabase = () => {
     DBDataSource.initialize()
         .then(() => {
         console.info("Database successfully sycned!");
-        // Set repositories
-        exports.userRepository = userRepository = DBDataSource.getRepository(entities_1.User);
+        exports.usersRepository = usersRepository = DBDataSource.getRepository(entities_1.UserEntity);
+        exports.userRolesRepository = userRolesRepository = DBDataSource.getRepository(entities_1.UserRoleEntity);
+        exports.announcementsRepository = announcementsRepository = DBDataSource.getRepository(entities_1.AnnouncementEntity);
     })
         .catch((error) => {
         console.error("Failed to sync database");

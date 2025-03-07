@@ -15,6 +15,7 @@ const typeorm_1 = require("typeorm");
 const shared_entity_1 = require("./shared.entity");
 let User = class User extends shared_entity_1.DateFieldsEntity {
     id;
+    userRoleId;
     firstName;
     middleName;
     lastName;
@@ -28,12 +29,18 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
+    (0, typeorm_1.Column)({
+        nullable: true,
+    }),
+    __metadata("design:type", Number)
+], User.prototype, "userRoleId", void 0);
+__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "firstName", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        nullable: true
+        nullable: true,
     }),
     __metadata("design:type", String)
 ], User.prototype, "middleName", void 0);
@@ -43,7 +50,7 @@ __decorate([
 ], User.prototype, "lastName", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        unique: true
+        unique: true,
     }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
@@ -54,7 +61,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: "boolean",
-        default: false
+        default: false,
     }),
     __metadata("design:type", Boolean)
 ], User.prototype, "isEnabled", void 0);

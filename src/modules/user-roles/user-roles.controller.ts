@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { type Request, type Response, type NextFunction } from "express";
 import { BaseController } from "@/modules/base.controller";
 import { UserRolesService } from "./user-roles.service";
@@ -16,69 +17,40 @@ export class UserRolesController extends BaseController {
     this.bindClassMethods(this);
   }
 
-  public async fetchListHandler(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
-    const filtersFromQuery = this.generateListFilters(
-      request.query as ListFilterKeys
-    );
+  public async fetchListHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
+    const filtersFromQuery = this.generateListFilters(request.query as ListFilterKeys);
     const result = await this.userRolesService.fetchList(filtersFromQuery);
 
     return SendHttpResponse(response, result, HttpStatusCode.OK);
   }
 
   @ValidateUrlParams("id")
-  public async fetchByIdHandler(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
+  public async fetchByIdHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
     const result = await this.userRolesService.fetchById(+request.params?.id);
 
     return SendHttpResponse(response, result, HttpStatusCode.OK);
   }
 
   @ValidateUrlParams("id")
-  public async updateByIdHandler(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
-    const result = await this.userRolesService.updateById(
-      +request.params?.id,
-      request.body as UserRole
-    );
+  public async updateByIdHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
+    const result = await this.userRolesService.updateById(+request.params?.id, request.body as UserRole);
 
     return SendHttpResponse(response, result, HttpStatusCode.OK);
   }
 
   @ValidateUrlParams("id")
-  public async deleteByIdHandler(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
+  public async deleteByIdHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
     const result = await this.userRolesService.deleteById(+request.params?.id);
 
     return SendHttpResponse(response, result, HttpStatusCode.OK);
   }
 
   @ValidatePayload(UserRoleDTO)
-  public async createHandler(
-    request: Request,
-    response: Response,
-    next: NextFunction
-  ): Promise<any> {
+  public async createHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
     const result = await this.userRolesService.create(request.body as UserRole);
 
     if (!result) {
-      return SendHttpResponse(
-        response,
-        "INVALID_OR_ALREADY_EXISTS",
-        HttpStatusCode.UNPROCESSABLE_ENTITY
-      );
+      return SendHttpResponse(response, "INVALID_OR_ALREADY_EXISTS", HttpStatusCode.UNPROCESSABLE_ENTITY);
     }
 
     return SendHttpResponse(response, result, HttpStatusCode.CREATED);

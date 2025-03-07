@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { type Request, type Response, type NextFunction } from "express";
 import { BaseController } from "@/modules/base.controller";
 import { AnnouncementsService } from "./announcements.service";
