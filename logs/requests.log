@@ -184,3 +184,7 @@
 [2025-03-07T03:48:57.681Z] POST /api/v1/user-roles 201 {"name":"Staff"}
 [2025-03-07T03:49:00.575Z] GET /api/v1/user-roles 200 {}
 [2025-03-07T04:19:43.876Z] GET /api/v1/system/healthcheck 404 {}
+[2025-03-07T04:20:07.670Z] GET /api/v1/system/healthcheck 200 {}
+[2025-03-07T04:20:07.729Z] GET /favicon.ico 404 {}
+[2025-03-07T04:24:05.919Z] GET /api/v1/system/healthcheck 304 {}
+[2025-03-07T04:24:05.937Z] GET /favicon.ico 404 {}

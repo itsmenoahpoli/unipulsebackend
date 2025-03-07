@@ -12,6 +12,7 @@ import "@/configs/sentry.config";
 dotenv.config();
 
 const app = express();
+Sentry.setupExpressErrorHandler(app);
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -22,22 +23,21 @@ initializeMiddlewares(app);
 initializeApiRoutes(app);
 initializeDatabase();
 
-Sentry.setupExpressErrorHandler(app);
 app.use(GlobalErrorHandlerMiddleware);
 
 const runApp = (): void => {
-	const appPort = SETTINGS.APP_PORT;
+  const appPort = SETTINGS.APP_PORT;
 
-	if (!appPort) {
-		console.error(`[ERROR]: No app port specified from settings`);
-		return;
-	}
+  if (!appPort) {
+    console.error(`[ERROR]: No app port specified from settings`);
+    return;
+  }
 
-	app.listen(appPort, () => {
-		if (SETTINGS.APP_ENV === AppEnvironments.DEV) {
-			console.info(`[APP]: App started and running in ${SETTINGS.APP_URL}`);
-		}
-	});
+  app.listen(appPort, () => {
+    if (SETTINGS.APP_ENV === AppEnvironments.DEV) {
+      console.info(`[APP]: App started and running in ${SETTINGS.APP_URL}`);
+    }
+  });
 };
 
 export { runApp };
