@@ -1,13 +1,13 @@
-import { type Request, type Response, type NextFunction, type RequestHandler } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import { HttpStatusCode } from "@/types";
 
-export const SystemController = {
-	healthcheck: (request: Request, response: Response, next: NextFunction): void => {
-		response
-			.status(HttpStatusCode.OK)
-			.json({
-				message: "SYSTEM_ONLINE",
-			})
-			.send();
-	},
-};
+export class SystemController {
+  public healthcheck(request: Request, response: Response, next: NextFunction): any {
+    return response
+      .status(HttpStatusCode.OK)
+      .json({
+        message: "SYSTEM_ONLINE",
+      })
+      .send();
+  }
+}

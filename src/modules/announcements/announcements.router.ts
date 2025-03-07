@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { UserRolesController } from "./announcements.controller";
+import { AnnouncementsController } from "./announcements.controller";
 
 export class UserRolesRouter {
   private router: Router;
-  private userRolesController: UserRolesController;
+  private announcementsController: AnnouncementsController;
 
   constructor() {
     this.router = Router();
-    this.userRolesController = new UserRolesController();
+    this.announcementsController = new AnnouncementsController();
 
     this.initializeRoutes();
   }
@@ -17,10 +17,10 @@ export class UserRolesRouter {
   }
 
   private initializeRoutes() {
-    this.router.get("/", this.userRolesController.fetchListHandler);
-    this.router.get("/:id", this.userRolesController.fetchByIdHandler);
-    this.router.patch("/:id", this.userRolesController.updateByIdHandler);
-    this.router.delete("/:id", this.userRolesController.deleteByIdHandler);
-    this.router.post("/", this.userRolesController.createHandler);
+    this.router.get("/", this.announcementsController.fetchListHandler);
+    this.router.get("/:id", this.announcementsController.fetchByIdHandler);
+    this.router.patch("/:id", this.announcementsController.updateByIdHandler);
+    this.router.delete("/:id", this.announcementsController.deleteByIdHandler);
+    this.router.post("/", this.announcementsController.createHandler);
   }
 }
