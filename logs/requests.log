@@ -178,3 +178,8 @@
 [2025-02-10T05:01:47.579Z] GET /api/user-roles?withDeleted=false 200 {}
 [2025-02-10T05:01:52.716Z] GET /api/user-roles?withDeleted=true 200 {}
 [2025-02-10T05:01:53.802Z] GET /api/user-roles?withDeleted=true 200 {}
+[2025-03-07T03:47:40.402Z] POST /api/v1/user-roles 404 {"name":"Student"}
+[2025-03-07T03:48:13.259Z] POST /api/v1/user-roles 201 {"name":"Student"}
+[2025-03-07T03:48:16.787Z] GET /api/v1/user-roles 200 {}
+[2025-03-07T03:48:57.681Z] POST /api/v1/user-roles 201 {"name":"Staff"}
+[2025-03-07T03:49:00.575Z] GET /api/v1/user-roles 200 {}
