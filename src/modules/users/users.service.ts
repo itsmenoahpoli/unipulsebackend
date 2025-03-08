@@ -3,19 +3,25 @@ import { usersRepository } from "@/database";
 import { encryptPassword } from "@/utils";
 
 export class UsersService {
-	public async findByEmail(email: string): Promise<User | null> {
-		const user = await usersRepository.findOneBy({ email });
+  public async findByEmail(email: string): Promise<User | null> {
+    const user = await usersRepository.findOneBy({ email });
 
-		return user;
-	}
+    return user;
+  }
 
-	public async createUser(data: User): Promise<User> {
-		const user = usersRepository.create({
-			...data,
-			password: await encryptPassword(data.password),
-		});
-		await usersRepository.save(user);
+  public async findByStudentId(studentId: string): Promise<User | null> {
+    const user = await usersRepository.findOneBy({ studentId });
 
-		return user;
-	}
+    return user;
+  }
+
+  public async createUser(data: User): Promise<User> {
+    const user = usersRepository.create({
+      ...data,
+      password: await encryptPassword(data.password),
+    });
+    await usersRepository.save(user);
+
+    return user;
+  }
 }

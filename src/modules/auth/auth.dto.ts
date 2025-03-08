@@ -2,50 +2,55 @@ import { IsNotEmpty, IsEmail, IsString, IsOptional } from "class-validator";
 import { type RequestOtpType } from "@/types";
 
 export type SigninCredentials = {
-	email: string;
-	password: string;
+  studentId: string;
+  password: string;
 };
 
 export type SignupData = {
-	firstName: string;
-	middleName?: string;
-	lastName: string;
+  email: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
 } & SigninCredentials;
 
 export type RequestOtp = {
-	type: RequestOtpType;
-} & Pick<SigninCredentials, "email">;
+  type: RequestOtpType;
+} & Pick<SignupData, "email">;
 
 export class SigninCredentialsDTO implements SigninCredentials {
-	@IsNotEmpty()
-	@IsEmail()
-	email: string;
+  @IsNotEmpty()
+  @IsString()
+  studentId: string;
 
-	@IsNotEmpty()
-	@IsString()
-	password: string;
+  @IsNotEmpty()
+  @IsString()
+  password: string;
 }
 
 export class SignupDataDTO extends SigninCredentialsDTO implements SignupData {
-	@IsNotEmpty()
-	@IsString()
-	firstName: string;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
-	@IsOptional()
-	@IsString()
-	middleName?: string;
+  @IsNotEmpty()
+  @IsString()
+  firstName: string;
 
-	@IsNotEmpty()
-	@IsString()
-	lastName: string;
+  @IsOptional()
+  @IsString()
+  middleName?: string;
+
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
 }
 
 export class RequestOtpDTO implements RequestOtp {
-	@IsNotEmpty()
-	@IsString()
-	type: RequestOtpType;
+  @IsNotEmpty()
+  @IsString()
+  type: RequestOtpType;
 
-	@IsNotEmpty()
-	@IsEmail()
-	email: string;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 }

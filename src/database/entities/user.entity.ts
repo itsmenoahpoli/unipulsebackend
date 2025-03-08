@@ -4,36 +4,41 @@ import { DateFieldsEntity } from "./shared.entity";
 
 @Entity()
 export class User extends DateFieldsEntity {
-	@PrimaryGeneratedColumn()
-	id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-	@Column({
-		nullable: true,
-	})
-	userRoleId?: number;
+  @Column({
+    nullable: true,
+  })
+  userRoleId?: number;
 
-	@Column()
-	firstName: string;
+  @Column({
+    unique: true,
+  })
+  studentId: string;
 
-	@Column({
-		nullable: true,
-	})
-	middleName?: string;
+  @Column()
+  firstName: string;
 
-	@Column()
-	lastName: string;
+  @Column({
+    nullable: true,
+  })
+  middleName?: string;
 
-	@Column({
-		unique: true,
-	})
-	email: string;
+  @Column()
+  lastName: string;
 
-	@Column()
-	password: string;
+  @Column({
+    unique: true,
+  })
+  email: string;
 
-	@Column({
-		type: "boolean",
-		default: false,
-	})
-	isEnabled: boolean;
+  @Column()
+  password: string;
+
+  @Column({
+    type: "boolean",
+    default: false,
+  })
+  isEnabled: boolean;
 }
