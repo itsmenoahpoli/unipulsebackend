@@ -1,7 +1,0 @@
-[2025-03-07T04:28:23.513Z] GET / 404 {}
-[2025-03-07T04:28:33.073Z] GET /api/v1/system/healthcheck 200 {}
-[2025-03-07T04:28:33.084Z] GET /favicon.ico 404 {}
-[2025-03-07T04:28:33.840Z] GET /api/v1/system/healthcheck 304 {}
-[2025-03-07T04:28:33.857Z] GET /favicon.ico 404 {}
-[2025-03-07T04:28:34.314Z] GET /api/v1/system/healthcheck 200 {}
-[2025-03-07T04:28:34.327Z] GET /favicon.ico 404 {}
