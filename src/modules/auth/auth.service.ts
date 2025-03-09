@@ -3,7 +3,6 @@ import { UsersService } from "@/modules/users/users.service";
 import { RequestOtp, type SigninCredentials, type SignupData } from "./auth.dto";
 import { verifyPassword } from "@/utils";
 import { SETTINGS } from "@/configs";
-
 export class AuthService {
   public usersService: UsersService;
 
@@ -23,14 +22,21 @@ export class AuthService {
     const authToken = JWT.sign({ user }, SETTINGS.APP_JWT_SECRET_KEY, { expiresIn: "1h" });
 
     return {
+      user,
       authToken,
     };
   }
 
   public async signupAccount(accountData: SignupData) {
-    const user = await this.usersService.findByEmail(accountData.email);
+    const isUserExist = await this.usersService.checkExistence(accountData);
 
-    if (user) {
+    console.log("signupAccount", isUserExist);
+
+    return {
+      accountExists: true,
+    };
+
+    if (isUserExist) {
       return {
         accountExists: true,
       };

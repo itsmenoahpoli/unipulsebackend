@@ -31,6 +31,8 @@ export class AuthController extends BaseController {
   public async signupHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
     const result = await this.authService.signupAccount(request.body as SignupData);
 
+    console.log("signupHandler", result);
+
     if (result.accountExists) {
       return this.sendHttpResponse(response, HttpErrorTypes.ALREADY_EXISTS, HttpStatusCode.UNPROCESSABLE_ENTITY);
     }
