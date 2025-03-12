@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AnnouncementsController } from "./announcements.controller";
 
-export class UserRolesRouter {
+export class AnnouncementsRouter {
   private router: Router;
   private announcementsController: AnnouncementsController;
 

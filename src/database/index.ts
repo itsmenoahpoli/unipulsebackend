@@ -10,7 +10,7 @@ const DBDataSource = new DataSource({
   password: SETTINGS.APP_DB_PASSWORD,
   database: SETTINGS.APP_DB_DATABASE,
   synchronize: true,
-  logging: false,
+  logging: true,
   entities: [__dirname + "/entities/*.entity.ts"],
   migrations: [__dirname + "/migrations/*.migration.ts"],
   subscribers: [],

@@ -3,6 +3,7 @@ import { UsersService } from "@/modules/users/users.service";
 import { RequestOtp, type SigninCredentials, type SignupData } from "./auth.dto";
 import { verifyPassword } from "@/utils";
 import { SETTINGS } from "@/configs";
+import { User } from "@/modules/users/user.dto";
 export class AuthService {
   public usersService: UsersService;
 
@@ -30,19 +31,13 @@ export class AuthService {
   public async signupAccount(accountData: SignupData) {
     const isUserExist = await this.usersService.checkExistence(accountData);
 
-    console.log("signupAccount", isUserExist);
-
-    return {
-      accountExists: true,
-    };
-
     if (isUserExist) {
       return {
         accountExists: true,
       };
     }
 
-    const createUser = await this.usersService.createUser({ ...accountData, isEnabled: true });
+    const createUser = await this.usersService.createUser(accountData as User);
     delete (createUser as any).password;
 
     return {

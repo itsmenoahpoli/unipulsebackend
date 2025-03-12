@@ -5,6 +5,18 @@ import { type OmitDbFields } from "@/types";
 export type User = OmitDbFields<UserEntity>;
 
 export class UserDataDTO implements User {
+  @IsOptional()
+  @IsString()
+  studentId: string;
+
+  @IsOptional()
+  @IsString()
+  studentCourse: string;
+
+  @IsOptional()
+  @IsString()
+  studentYearLevel: string;
+
   @IsNotEmpty()
   @IsString()
   firstName: string;
@@ -28,4 +40,8 @@ export class UserDataDTO implements User {
   @IsOptional()
   @IsBoolean()
   isEnabled: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isAdmin: boolean;
 }
