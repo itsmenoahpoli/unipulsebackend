@@ -1,18 +1,15 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import * as Sentry from "@sentry/node";
 import { initializeApiRoutes } from "@/routers";
 import { initializeMiddlewares, GlobalErrorHandlerMiddleware } from "@/middlewares";
 import { initializeDatabase } from "@/database";
 import { SETTINGS } from "@/configs";
 import { AppEnvironments } from "@/types";
-import "@/configs/sentry.config";
 
 dotenv.config();
 
 const app = express();
-Sentry.setupExpressErrorHandler(app);
 
 app.use(express.static("public"));
 app.use(express.json());
