@@ -1,5 +1,5 @@
 import { DataSource, Repository, type DataSourceOptions } from "typeorm";
-import { UserEntity, UserRoleEntity, AnnouncementEntity } from "./entities";
+import { UserEntity, AnnouncementEntity } from "./entities";
 import { SETTINGS } from "@/configs";
 
 const DBDataSource = new DataSource({
@@ -17,7 +17,6 @@ const DBDataSource = new DataSource({
 } as DataSourceOptions);
 
 let usersRepository: Repository<UserEntity>;
-let userRolesRepository: Repository<UserRoleEntity>;
 let announcementsRepository: Repository<AnnouncementEntity>;
 
 const initializeDatabase = () => {
@@ -26,7 +25,6 @@ const initializeDatabase = () => {
       console.info("Database successfully sycned!");
 
       usersRepository = DBDataSource.getRepository(UserEntity);
-      userRolesRepository = DBDataSource.getRepository(UserRoleEntity);
       announcementsRepository = DBDataSource.getRepository(AnnouncementEntity);
     })
     .catch((error) => {
@@ -35,10 +33,4 @@ const initializeDatabase = () => {
     });
 };
 
-export {
-  DBDataSource,
-  initializeDatabase,
-  usersRepository,
-  userRolesRepository,
-  announcementsRepository,
-};
+export { initializeDatabase, DBDataSource, usersRepository, announcementsRepository };

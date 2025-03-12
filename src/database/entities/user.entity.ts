@@ -14,8 +14,19 @@ export class User extends DateFieldsEntity {
 
   @Column({
     unique: true,
+    nullable: true,
   })
   studentId: string;
+
+  @Column({
+    nullable: true,
+  })
+  studentCourse: string;
+
+  @Column({
+    nullable: true,
+  })
+  studentYearLevel: string;
 
   @Column()
   firstName: string;
@@ -35,6 +46,12 @@ export class User extends DateFieldsEntity {
 
   @Column()
   password: string;
+
+  @Column({
+    type: "boolean",
+    default: false,
+  })
+  isAdmin: boolean;
 
   @Column({
     type: "boolean",
