@@ -6,6 +6,9 @@ export class AnnouncementsService {
   public async fetchList(query: ListFilterKeys) {
     return announcementsRepository.find({
       withDeleted: query.withDeleted as boolean,
+      order: {
+        id: "DESC",
+      },
     });
   }
 

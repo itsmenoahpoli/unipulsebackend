@@ -7,9 +7,7 @@ export class Announcement extends DateFieldsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    unique: true,
-  })
+  @Column()
   headline: string;
 
   @Column()
