@@ -31,6 +31,9 @@ export class UsersService {
       ...data,
       password: await encryptPassword(data.password as string),
     });
+
+    // @ts-ignore
+    delete user.password;
     await usersRepository.save(user);
 
     return user;
