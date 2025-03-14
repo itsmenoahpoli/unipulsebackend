@@ -26,10 +26,10 @@ export class UsersService {
     return false;
   }
 
-  public async createUser(data: User): Promise<User> {
+  public async createUser(data: Partial<User>): Promise<User> {
     const user = usersRepository.create({
       ...data,
-      password: await encryptPassword(data.password),
+      password: await encryptPassword(data.password as string),
     });
     await usersRepository.save(user);
 

@@ -3,7 +3,11 @@ import { SendHttpResponse } from "@/utils";
 import { HttpStatusCode } from "@/types";
 
 export class SystemController {
-  public healthcheck(request: Request, response: Response, next: NextFunction): any {
+  public healthcheckHandler(request: Request, response: Response, next: NextFunction): any {
     return SendHttpResponse(response, { status: "online" }, HttpStatusCode.OK);
+  }
+
+  public async createAdminAccountHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
+    return SendHttpResponse(response, { status: "ADMIN_ACCOUNT_CREATED" }, HttpStatusCode.CREATED);
   }
 }

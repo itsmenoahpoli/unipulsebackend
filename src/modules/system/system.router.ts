@@ -17,6 +17,7 @@ export class SystemRouter {
   }
 
   private initializeRoutes() {
-    this.router.get("/healthcheck", this.systemController.healthcheck);
+    this.router.get("/healthcheck", this.systemController.healthcheckHandler);
+    this.router.post("/create-admin-account", this.systemController.createAdminAccountHandler);
   }
 }
