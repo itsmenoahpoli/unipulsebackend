@@ -6,12 +6,16 @@ import { initializeMiddlewares, GlobalErrorHandlerMiddleware } from "@/middlewar
 import { initializeDatabase } from "@/database";
 import { SETTINGS } from "@/configs";
 import { AppEnvironments } from "@/types";
+import path from "path";
+import { ensureUploadDirs } from "@/utils/ensure-upload-dir.util";
 
 dotenv.config();
 
 const app = express();
 
-app.use(express.static("public"));
+// Serve static files from the 'public' directory
+app.use("/public", express.static(path.join(__dirname, "../public")));
+
 app.use(express.json());
 app.use(cors());
 app.disable("powered-by");
