@@ -1,6 +1,11 @@
 import { IsNotEmpty, IsEmail, IsString, IsOptional } from "class-validator";
 import { type RequestOtpType } from "@/types";
 
+export type AdminSigninCredentials = {
+  email: string;
+  password: string;
+};
+
 export type SigninCredentials = {
   studentId: string;
   password: string;
@@ -21,6 +26,16 @@ export class SigninCredentialsDTO implements SigninCredentials {
   @IsNotEmpty()
   @IsString()
   studentId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
+
+export class AdminSigninCredentialsDTO implements AdminSigninCredentials {
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
   @IsNotEmpty()
   @IsString()
