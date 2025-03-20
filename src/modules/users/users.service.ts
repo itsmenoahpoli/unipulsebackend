@@ -32,9 +32,10 @@ export class UsersService {
       password: await encryptPassword(data.password as string),
     });
 
+    await usersRepository.save(user);
+
     // @ts-ignore
     delete user.password;
-    await usersRepository.save(user);
 
     return user;
   }
