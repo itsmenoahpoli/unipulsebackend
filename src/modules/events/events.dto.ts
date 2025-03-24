@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional } from "class-validator";
 import { EventEntity } from "@/database/entities";
 import { type OmitDbFields } from "@/types";
 
@@ -13,7 +13,6 @@ export class EventDTO implements Event {
   @IsString()
   body: string;
 
-  @IsNotEmpty()
-  @IsString()
-  image: string;
+  @IsOptional()
+  image: any;
 }
