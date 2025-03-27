@@ -13,10 +13,6 @@ export class EventDTO implements Event {
   @IsString()
   body: string;
 
-<<<<<<< Updated upstream
-  @IsOptional()
-  image: any;
-=======
   @IsNotEmpty()
   @IsString()
   image: string;
@@ -24,5 +20,4 @@ export class EventDTO implements Event {
   @IsNotEmpty()
   @IsString()
   eventAt: string;
->>>>>>> Stashed changes
 }
