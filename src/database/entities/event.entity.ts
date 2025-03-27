@@ -15,4 +15,9 @@ export class Event extends DateFieldsEntity {
 
   @Column()
   image: string;
+
+  @Column({
+    nullable: true,
+  })
+  eventAt?: string;
 }

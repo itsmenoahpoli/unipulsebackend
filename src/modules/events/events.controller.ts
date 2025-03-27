@@ -8,6 +8,7 @@ import { HttpStatusCode, ListFilterKeys } from "@/types";
 import { Event, EventDTO } from "./events.dto";
 import multer from "multer";
 import path from "path";
+import { SETTINGS } from "@/configs";
 
 const storage = multer.diskStorage({
   destination: "./public/uploads/events",
@@ -25,6 +26,10 @@ export class EventsController extends BaseController {
     super();
     this.eventsService = new EventsService();
     this.bindClassMethods(this);
+  }
+
+  private getPublicImageUrl(filename: string): string {
+    return `${SETTINGS.APP_URL}/public/uploads/events/${filename}`;
   }
 
   public async fetchListHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
@@ -46,7 +51,7 @@ export class EventsController extends BaseController {
 
       const data = {
         ...request.body,
-        image: request.file ? `/uploads/events/${request.file.filename}` : undefined,
+        image: request.file ? this.getPublicImageUrl(request.file.filename) : undefined,
       };
 
       const result = await this.eventsService.updateById(+request.params?.id, data as Event);
@@ -70,7 +75,7 @@ export class EventsController extends BaseController {
 
       const data = {
         ...request.body,
-        image: `/uploads/events/${request.file.filename}`,
+        image: this.getPublicImageUrl(request.file.filename),
       };
 
       const result = await this.eventsService.create(data as Event);

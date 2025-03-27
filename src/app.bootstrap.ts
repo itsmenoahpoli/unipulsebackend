@@ -13,9 +13,7 @@ dotenv.config();
 
 const app = express();
 
-// Serve static files from the 'public' directory
 app.use("/public", express.static(path.join(__dirname, "../public")));
-
 app.use(express.json());
 app.use(cors());
 app.disable("powered-by");
