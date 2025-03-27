@@ -6,25 +6,25 @@ import { ListFilterKeys } from "@/types";
 
 export class EventsService {
   public async fetchList(query: ListFilterKeys) {
-    // return eventsRepository.find({
-    //   withDeleted: query.withDeleted as boolean,
-    //   order: {
-    //     id: "DESC",
-    //   },
-    // });
-
-    const currentDate = dayjs().startOf("day").toISOString();
-
     return eventsRepository.find({
-      where: {
-        eventAt: MoreThanOrEqual(currentDate),
-      },
       withDeleted: query.withDeleted as boolean,
       order: {
-        eventAt: "ASC", // Order by nearest date first
+        id: "DESC",
       },
-      take: 2, // Limit to 2 results
     });
+
+    // const currentDate = dayjs().startOf("day").toISOString();
+
+    // return eventsRepository.find({
+    //   where: {
+    //     eventAt: MoreThanOrEqual(currentDate),
+    //   },
+    //   withDeleted: query.withDeleted as boolean,
+    //   order: {
+    //     eventAt: "ASC", // Order by nearest date first
+    //   },
+    //   take: 2, // Limit to 2 results
+    // });
   }
 
   public async fetchById(id: number) {
