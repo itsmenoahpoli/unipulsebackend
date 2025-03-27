@@ -1,5 +1,5 @@
 import { DataSource, Repository, type DataSourceOptions } from "typeorm";
-import { UserEntity, AnnouncementEntity, EventEntity } from "./entities";
+import { UserEntity, AnnouncementEntity, EventEntity, ForumEntity } from "./entities";
 import { SETTINGS } from "@/configs";
 
 const DBDataSource = new DataSource({
@@ -19,6 +19,7 @@ const DBDataSource = new DataSource({
 let usersRepository: Repository<UserEntity>;
 let announcementsRepository: Repository<AnnouncementEntity>;
 let eventsRepository: Repository<EventEntity>;
+let forumsRepository: Repository<ForumEntity>;
 
 const initializeDatabase = () => {
   DBDataSource.initialize()
@@ -28,6 +29,7 @@ const initializeDatabase = () => {
       usersRepository = DBDataSource.getRepository(UserEntity);
       announcementsRepository = DBDataSource.getRepository(AnnouncementEntity);
       eventsRepository = DBDataSource.getRepository(EventEntity);
+      forumsRepository = DBDataSource.getRepository(ForumEntity);
     })
     .catch((error) => {
       console.error("Failed to sync database");
@@ -35,4 +37,11 @@ const initializeDatabase = () => {
     });
 };
 
-export { initializeDatabase, DBDataSource, usersRepository, announcementsRepository, eventsRepository };
+export {
+  initializeDatabase,
+  DBDataSource,
+  usersRepository,
+  announcementsRepository,
+  eventsRepository,
+  forumsRepository,
+};

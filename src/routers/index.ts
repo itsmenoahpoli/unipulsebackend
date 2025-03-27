@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { SystemRouter, AuthRouter, AnnouncementsRouter, EventsRouter } from "./module-routers";
+import { SystemRouter, AuthRouter, AnnouncementsRouter, EventsRouter, ForumsRouter } from "./module-routers";
 import { printRouterRoutes } from "@/utils";
 import { SETTINGS } from "@/configs";
 import { AppEnvironments } from "@/types";
@@ -20,6 +20,10 @@ const routesConfig = [
   {
     uri: "/events",
     router: new EventsRouter().routerRoutes,
+  },
+  {
+    uri: "/forums",
+    router: new ForumsRouter().routerRoutes,
   },
 ];
 
