@@ -1,6 +1,7 @@
 import { Forum } from "./forums.dto";
-import { forumsRepository } from "@/database";
+import { forumsRepository, forumPostsRepository } from "@/database";
 import { ListFilterKeys } from "@/types";
+import { ForumPost } from "@/database/entities/forum-post.entity";
 
 export class ForumsService {
   public async fetchList(query: ListFilterKeys) {
@@ -36,5 +37,30 @@ export class ForumsService {
     const forum = forumsRepository.create(data);
     await forumsRepository.save(forum);
     return forum;
+  }
+
+  // New methods for forum posts
+  public async createForumPost(forumId: number, userId: number, data: Partial<ForumPost>) {
+    const forum = await this.fetchById(forumId);
+    if (!forum) return null;
+
+    const post = forumPostsRepository.create({
+      ...data,
+      forumId,
+      userId,
+    });
+
+    await forumPostsRepository.save(post);
+    return post;
+  }
+
+  public async fetchForumPosts(forumId: number) {
+    return forumPostsRepository.find({
+      where: { forumId },
+      relations: ["user"],
+      order: {
+        createdAt: "DESC",
+      },
+    });
   }
 }

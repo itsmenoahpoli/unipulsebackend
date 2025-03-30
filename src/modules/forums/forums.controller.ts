@@ -82,4 +82,28 @@ export class ForumsController extends BaseController {
       return SendHttpResponse(response, result, HttpStatusCode.CREATED);
     });
   }
+
+  // New handlers for forum posts
+  @ValidateUrlParams("forumId")
+  public async createForumPostHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
+    // @ts-ignore - user is added by auth middleware
+    const userId = request.user?.id;
+    if (!userId) {
+      return SendHttpResponse(response, "Unauthorized", HttpStatusCode.UNAUTHORIZED);
+    }
+
+    const result = await this.forumsService.createForumPost(+request.params.forumId, userId, request.body);
+
+    if (!result) {
+      return SendHttpResponse(response, "Forum not found", HttpStatusCode.NOT_FOUND);
+    }
+
+    return SendHttpResponse(response, result, HttpStatusCode.CREATED);
+  }
+
+  @ValidateUrlParams("forumId")
+  public async fetchForumPostsHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
+    const result = await this.forumsService.fetchForumPosts(+request.params.forumId);
+    return SendHttpResponse(response, result, HttpStatusCode.OK);
+  }
 }
