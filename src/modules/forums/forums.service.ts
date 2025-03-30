@@ -1,12 +1,12 @@
 import { Forum } from "./forums.dto";
 import { forumsRepository, forumPostsRepository } from "@/database";
 import { ListFilterKeys } from "@/types";
-import { ForumPost } from "@/database/entities/forum-post.entity";
 
 export class ForumsService {
   public async fetchList(query: ListFilterKeys) {
     return forumsRepository.find({
       withDeleted: query.withDeleted as boolean,
+      relations: ["posts", "posts.user"],
       order: {
         id: "DESC",
       },
@@ -14,7 +14,10 @@ export class ForumsService {
   }
 
   public async fetchById(id: number) {
-    const forum = forumsRepository.findOneBy({ id });
+    const forum = forumsRepository.findOne({
+      where: { id },
+      relations: ["posts", "posts.user"],
+    });
     return forum;
   }
 
