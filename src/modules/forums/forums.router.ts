@@ -22,9 +22,7 @@ export class ForumsRouter {
     this.router.patch("/:id", this.forumsController.updateByIdHandler);
     this.router.delete("/:id", this.forumsController.deleteByIdHandler);
     this.router.post("/", this.forumsController.createHandler);
-
-    // New routes for forum posts
     this.router.get("/:forumId/posts", this.forumsController.fetchForumPostsHandler);
-    this.router.post("/:forumId/posts", CheckAuthMiddleware, this.forumsController.createForumPostHandler);
+    this.router.post("/:forumId/posts", this.forumsController.createForumPostHandler);
   }
 }

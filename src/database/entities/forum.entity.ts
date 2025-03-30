@@ -15,5 +15,5 @@ export class Forum extends DateFieldsEntity {
   logo: string;
 
   @OneToMany(() => ForumPost, (post) => post.forum)
-  posts: ForumPost[];
+  posts?: ForumPost[];
 }

@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { type Request, type Response, type NextFunction } from "express";
 import { BaseController } from "@/modules/base.controller";
 import { ForumsService } from "./forums.service";
-import { ValidateUrlParams, ValidatePayload } from "@/decorators";
+import { ValidateUrlParams } from "@/decorators";
 import { SendHttpResponse } from "@/utils";
 import { HttpStatusCode, ListFilterKeys } from "@/types";
 import { Forum, ForumDTO } from "./forums.dto";
@@ -83,16 +83,9 @@ export class ForumsController extends BaseController {
     });
   }
 
-  // New handlers for forum posts
   @ValidateUrlParams("forumId")
   public async createForumPostHandler(request: Request, response: Response, next: NextFunction): Promise<any> {
-    // @ts-ignore - user is added by auth middleware
-    const userId = request.user?.id;
-    if (!userId) {
-      return SendHttpResponse(response, "Unauthorized", HttpStatusCode.UNAUTHORIZED);
-    }
-
-    const result = await this.forumsService.createForumPost(+request.params.forumId, userId, request.body);
+    const result = await this.forumsService.createForumPost(+request.params.forumId, request.body);
 
     if (!result) {
       return SendHttpResponse(response, "Forum not found", HttpStatusCode.NOT_FOUND);

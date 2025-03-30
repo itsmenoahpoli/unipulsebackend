@@ -10,9 +10,6 @@ export class ForumPost extends DateFieldsEntity {
   id: number;
 
   @Column()
-  title: string;
-
-  @Column()
   content: string;
 
   @Column()

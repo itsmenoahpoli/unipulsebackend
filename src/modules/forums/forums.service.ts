@@ -40,14 +40,13 @@ export class ForumsService {
   }
 
   // New methods for forum posts
-  public async createForumPost(forumId: number, userId: number, data: Partial<ForumPost>) {
+  public async createForumPost(forumId: number, data: any) {
     const forum = await this.fetchById(forumId);
     if (!forum) return null;
 
     const post = forumPostsRepository.create({
       ...data,
       forumId,
-      userId,
     });
 
     await forumPostsRepository.save(post);
